@@ -1,0 +1,29 @@
+﻿@page
+@model ASsiaoeh.Pages._2faModel
+@{
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3">Two-Factor Authentication</h1>
+
+            <!-- Verification code form -->
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Verification Code</label>
+                    <input type="text" name="VerificationCode" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

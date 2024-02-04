@@ -1,0 +1,57 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (HttpContext.Session.GetString("SessionTimedOut") == "true")
+{
+    <div class="text-center">
+        <h1 class="display-4">Session Timeout</h1>
+        <p>Your session has timed out. Please log in again.</p>
+        <form method="post" asp-page-handler="Logout">
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </div>
+}
+
+<script>
+
+    // Function to show a popup message
+    function showSessionTimeoutPopup() {
+        alert('Your session has timed out. Please log in again.');
+        document.getElementById('logoutForm').submit();
+    }
+
+    var sessionTimeoutSeconds = @(Convert.ToInt32(TimeSpan.FromMinutes(5).TotalSeconds)); // Match the server-side timeout
+    var sessionTimeoutMilliseconds = sessionTimeoutSeconds * 1000;
+    setTimeout(showSessionTimeoutPopup, sessionTimeoutMilliseconds);
+
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Welcome, @ViewData["FName"] @ViewData["LName"]!</p>
+        <p>Email: @ViewData["Email"]</p>
+        <p>Mobile Number: @ViewData["Mobile"]</p>
+        <p>Credit Card Number: @ViewData["CreditCard"]</p>
+        <p>Billing Address: @ViewData["Billing"]</p>
+        <p>Shipping Address: @ViewData["Shipping"]</p>
+        @if (Model.ViewData["Photo"] != null)
+        {
+            <div>
+                @{
+                    var photoBytes = ViewData["Photo"] as byte[];
+                    var base64String = photoBytes != null ? Convert.ToBase64String(photoBytes) : string.Empty;
+                }
+                <img src="data:image/jpeg;base64,@base64String" alt="User Photo" style="max-width: 300px; max-height: 300px;" />
+            </div>
+        }
+    }
+</div>

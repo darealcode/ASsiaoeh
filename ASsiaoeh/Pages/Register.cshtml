@@ -1,0 +1,126 @@
+﻿@page
+@model ASsiaoeh.Pages.RegisterModel
+@{
+}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3">Register </h1>
+
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.FName">First Name</label>
+                    <input type="text" asp-for="registerModel.FName" class="form-control" />
+                    <span asp-validation-for="registerModel.FName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.LName">Last Name</label>
+                    <input type="text" asp-for="registerModel.LName" class="form-control" />
+                    <span asp-validation-for="registerModel.LName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.CreditCard">Credit Card No</label>
+                    <input type="text" asp-for="registerModel.CreditCard" class="form-control" />
+                    <span asp-validation-for="registerModel.CreditCard" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Mobile">Mobile No</label>
+                    <input type="text" asp-for="registerModel.Mobile" class="form-control" />
+                    <span asp-validation-for="registerModel.Mobile" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Billing">Billing Address</label>
+                    <input type="text" asp-for="registerModel.Billing" class="form-control" />
+                    <span asp-validation-for="registerModel.Billing" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Shipping">Shipping Address</label>
+                    <input type="text" asp-for="registerModel.Shipping" class="form-control" />
+                    <span asp-validation-for="registerModel.Shipping" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Email">Email Address</label>
+                    <input type="text" asp-for="registerModel.Email" class="form-control" />
+                    <span asp-validation-for="registerModel.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Password">Password</label>
+                    <input type="password" asp-for="registerModel.Password" class="form-control" />
+                    <span asp-validation-for="registerModel.Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password Strength</label>
+                    <div id="password-strength" class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="form-text text-muted">Password must be at least 8 characters long and include a combination of uppercase and lowercase letters, numbers, and special characters.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.ConfirmPassword">Confirm Password</label>
+                    <input type="password" asp-for="registerModel.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="registerModel.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                @section Scripts {
+                    <script>
+                        $(document).ready(function () {
+                            $('#registerModel_Password').keyup(function () {
+                                var password = $(this).val();
+                                var strength = 0;
+
+                                // Check for at least 8 characters
+                                if (password.length >= 12) {
+                                    strength += 20;
+                                }
+
+                                // Check for uppercase letters
+                                if (/[A-Z]/.test(password)) {
+                                    strength += 20;
+                                }
+
+                                // Check for lowercase letters
+                                if (/[a-z]/.test(password)) {
+                                    strength += 20;
+                                }
+
+                                // Check for numbers
+                                if (/\d/.test(password)) {
+                                    strength += 20;
+                                }
+
+                                // Check for special characters
+                                if (/[^A-Za-z0-9]/.test(password)) {
+                                    strength += 20;
+                                }
+
+                                // Update the progress bar
+                                $('#password-strength .progress-bar').css('width', strength + '%');
+                            });
+                        });
+                    </script>
+                }
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="registerModel.Photo">Photo (.JPG only)</label>
+                    <input type="file" accept=".jpg" asp-for="registerModel.Photo" class="form-control" />
+                    <span asp-validation-for="registerModel.Photo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
